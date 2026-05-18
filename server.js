@@ -1,11 +1,10 @@
 // =============================================
 // POTENTIA RH — SERVER.JS
-// Deploy no Render.com
+// Deploy no Render.com — IA: Google Gemini
 // =============================================
 
-const Anthropic = require("@anthropic-ai/sdk");
-const express   = require("express");
-const cors      = require("cors");
+const express = require("express");
+const cors    = require("cors");
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -26,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 // =============================================
-// ROTA — ANÁLISE COM IA (Claude)
+// ROTA — ANÁLISE COM IA (Google Gemini)
 // =============================================
 
 app.post("/analisar-ia", async (req, res) => {
@@ -37,13 +36,7 @@ app.post("/analisar-ia", async (req, res) => {
     return res.status(400).json({ erro: "Campo 'pressao' é obrigatório." });
   }
 
-  try {
-
-    const client = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-    });
-
-    const prompt = `Você é um especialista em Recursos Humanos e psicologia organizacional.
+  const prompt = `Você é um especialista em Recursos Humanos e psicologia organizacional.
 
 Analise o seguinte perfil comportamental de candidato:
 
@@ -60,21 +53,28 @@ Forneça uma análise profissional estruturada com os seguintes tópicos:
 
 Seja direto, profissional e use linguagem acessível. Responda em português.`;
 
-    const mensagem = await client.messages.create({
-      model: "claude-opus-4-5",
-      max_tokens: 1024,
-      messages: [
-        { role: "user", content: prompt }
-      ],
-    });
+  try {
 
-    const resultado = mensagem.content[0].text;
+    const resposta = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      }
+    );
+
+    const dados = await resposta.json();
+
+    const resultado = dados.candidates[0].content.parts[0].text;
 
     res.json({ resultado });
 
   } catch (erro) {
 
-    console.error("Erro na API do Claude:", erro.message);
+    console.error("Erro na API do Gemini:", erro.message);
 
     res.status(500).json({ erro: "Erro ao processar análise com IA." });
 
