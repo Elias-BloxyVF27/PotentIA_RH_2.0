@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PotentIA RH</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="logo">Potent<span>IA</span> RH</div>
+    <nav>
+      <a href="#login">Login</a>
+      <a href="#cadastro">Cadastro</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#formulario">Formulário</a>
+      <a href="#perfil">Perfil</a>
+    </nav>
+    <button class="btn-tema" id="btnTema" title="Alternar tema">🌙</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">✦ Inteligência Artificial aplicada ao RH</div>
+    <h1>Descobrindo talentos<br><em>além do currículo</em></h1>
+    <p>Análise comportamental com IA para identificar o candidato ideal com precisão e profundidade.</p>
+  </section>
+
+  <main>
+
+    <!-- LOGIN -->
+    <div class="card" id="login">
+      <div class="card-head">
+        <div class="card-icon icon-a">🔐</div>
+        <h2>Login</h2>
+      </div>
+      <form id="formLogin">
+        <div class="campo">
+          <label>E-mail</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com">
+        </div>
+        <div class="campo">
+          <label>Senha</label>
+          <input type="password" id="loginSenha" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar →</button>
+      </form>
+    </div>
+
+    <!-- CADASTRO -->
+    <div class="card" id="cadastro">
+      <div class="card-head">
+        <div class="card-icon icon-b">👤</div>
+        <h2>Cadastro de Candidato</h2>
+      </div>
+      <form id="formCadastro">
+        <div class="grid-2">
+          <div class="campo">
+            <label>Nome completo</label>
+            <input type="text" id="cadNome" placeholder="João Silva">
+          </div>
+          <div class="campo">
+            <label>E-mail</label>
+            <input type="email" id="cadEmail" placeholder="joao@email.com">
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="campo">
+            <label>Cidade</label>
+            <input type="text" id="cadCidade" placeholder="Salvador, BA">
+          </div>
+          <div class="campo">
+            <label>Área de atuação</label>
+            <select id="cadArea">
+              <option value="">Selecione</option>
+              <option>Administração</option>
+              <option>Tecnologia</option>
+              <option>Marketing</option>
+              <option>Financeiro</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo">
+          <label>Habilidades principais</label>
+          <input type="text" id="cadHabilidades" placeholder="Ex: Liderança, Excel, Comunicação">
+        </div>
+        <div class="campo">
+          <label>Sobre você</label>
+          <textarea id="cadBio" rows="4" placeholder="Fale sobre sua trajetória profissional..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar →</button>
+      </form>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="card" id="dashboard">
+      <div class="card-head">
+        <div class="card-icon icon-c">📊</div>
+        <h2>Dashboard</h2>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-item">
+          <div class="dash-val" id="dashComp">—</div>
+          <div class="dash-lbl">Compatibilidade</div>
+        </div>
+        <div class="dash-item">
+          <div class="dash-val" id="dashPerfil" style="font-size:14px">—</div>
+          <div class="dash-lbl">Perfil</div>
+        </div>
+        <div class="dash-item">
+          <div class="dash-val" id="dashHab" style="font-size:13px">—</div>
+          <div class="dash-lbl">Habilidades</div>
+        </div>
+        <div class="dash-item">
+          <div class="dash-val" id="dashStatus" style="font-size:13px;color:var(--success)">Aguardando</div>
+          <div class="dash-lbl">Status</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO COMPORTAMENTAL -->
+    <div class="card" id="formulario">
+      <div class="card-head">
+        <div class="card-icon icon-d">🧠</div>
+        <h2>Formulário Comportamental</h2>
+      </div>
+      <form id="formComportamental">
+        <div class="campo">
+          <label>Como você reage sob pressão?</label>
+          <textarea id="fPressao" rows="4" placeholder="Descreva como lida com situações de alta pressão e prazos apertados..."></textarea>
+        </div>
+        <div class="campo">
+          <label>Preferência de trabalho</label>
+          <select id="fEquipe">
+            <option value="">Selecione</option>
+            <option>Sozinho</option>
+            <option>Equipe</option>
+            <option>Ambos</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Maior ponto forte</label>
+          <input type="text" id="fForte" placeholder="Ex: Resolução criativa de problemas">
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn-outline">Calcular compatibilidade</button>
+        </div>
+      </form>
+
+      <div class="divisor"></div>
+
+      <button class="btn btn-ia" id="botaoIA">✦ Analisar com IA</button>
+      <div id="resultadoIA"></div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="card" id="perfil">
+      <div class="card-head">
+        <div class="card-icon icon-a">🪪</div>
+        <h2>Perfil do Candidato</h2>
+      </div>
+      <div class="perfil-grid">
+        <div class="perfil-item">
+          <div class="perfil-key">Nome</div>
+          <div class="perfil-val" id="perfilNome">—</div>
+        </div>
+        <div class="perfil-item">
+          <div class="perfil-key">Área</div>
+          <div class="perfil-val" id="perfilArea">—</div>
+        </div>
+        <div class="perfil-item">
+          <div class="perfil-key">Habilidades</div>
+          <div class="perfil-val" id="perfilHabilidades">—</div>
+        </div>
+        <div class="perfil-item">
+          <div class="perfil-key">Status</div>
+          <div class="perfil-val" id="perfilStatus">Aguardando cadastro</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 PotentIA RH — Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
