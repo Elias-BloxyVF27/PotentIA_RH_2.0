@@ -157,7 +157,7 @@ document.getElementById("botaoIA").addEventListener("click", async function () {
 
   try {
 
-    const resposta = await fetch(BACKEND_URL + "/analisar-ia", {
+    const resposta = await fetch(BACKEND_URL + "analisar-ia", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
