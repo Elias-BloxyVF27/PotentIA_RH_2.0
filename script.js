@@ -4,7 +4,7 @@
 
 // ⚠️ IMPORTANTE: substitua pela URL do seu backend no Render.com
 // Exemplo: "https://potentia-rh-backend.onrender.com"
-const BACKEND_URL = "https://SEU-BACKEND.onrender.com";
+const BACKEND_URL = "https://potentia-rh-2-0.onrender.com/";
 
 console.log("PotentIA RH iniciado.");
 
