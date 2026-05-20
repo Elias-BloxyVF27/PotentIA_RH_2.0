@@ -38,7 +38,7 @@ app.post("/analisar-ia", async (req, res) => {
 
   // Verificar se a chave está configurada
   if (!process.env.GEMINI_API_KEY) {
-    console.error("VFM_KEY não está configurada no Render.");
+    console.error("GEMINI_API_KEY não está configurada no Render.");
     return res.status(500).json({ erro: "Chave da IA não configurada no servidor." });
   }
 
@@ -62,7 +62,7 @@ Seja direto, profissional e use linguagem acessível. Responda em português.`;
   try {
 
     const resposta = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.VFM_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
