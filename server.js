@@ -36,6 +36,12 @@ app.post("/analisar-ia", async (req, res) => {
     return res.status(400).json({ erro: "Campo 'pressao' é obrigatório." });
   }
 
+  // Verificar se a chave está configurada
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("VFM_KEY não está configurada no Render.");
+    return res.status(500).json({ erro: "Chave da IA não configurada no servidor." });
+  }
+
   const prompt = `Você é um especialista em Recursos Humanos e psicologia organizacional.
 
 Analise o seguinte perfil comportamental de candidato:
@@ -68,15 +74,26 @@ Seja direto, profissional e use linguagem acessível. Responda em português.`;
 
     const dados = await resposta.json();
 
+    // Verificar se o Gemini retornou erro
+    if (dados.error) {
+      console.error("Erro retornado pelo Gemini:", JSON.stringify(dados.error));
+      return res.status(500).json({ erro: "Erro da API do Gemini: " + dados.error.message });
+    }
+
+    // Verificar se a resposta tem o formato esperado
+    if (!dados.candidates || !dados.candidates[0]) {
+      console.error("Resposta inesperada do Gemini:", JSON.stringify(dados));
+      return res.status(500).json({ erro: "Resposta inválida do Gemini." });
+    }
+
     const resultado = dados.candidates[0].content.parts[0].text;
 
     res.json({ resultado });
 
   } catch (erro) {
 
-    console.error("Erro na API do Gemini:", erro.message);
-
-    res.status(500).json({ erro: "Erro ao processar análise com IA." });
+    console.error("Erro na requisição ao Gemini:", erro.message);
+    res.status(500).json({ erro: "Erro ao processar análise com IA: " + erro.message });
 
   }
 
